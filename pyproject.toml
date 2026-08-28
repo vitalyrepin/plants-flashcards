@@ -1,0 +1,53 @@
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["ALL"]
+
+# D100  -- Missing docstring in public module.
+#          The scripts carry their usage in the argparse help / module
+#          docstrings already; see below.
+#
+# D104  -- Missing docstring in public package.
+#          The decks are plain data folders, not importable packages.
+#
+# D203  -- 1 blank line required before class docstring.
+#          Incompatible with D211 ("no blank line before class docstring").
+#          PEP 257 prescribes *no* blank line, so D211 is kept and D203 is
+#          suppressed.
+#
+# D213  -- Multi-line docstring summary should start on the second line.
+#          Incompatible with D212 ("multi-line docstring summary should start
+#          on the first line").  PEP 257 places the summary on the first line,
+#          so D212 is kept and D213 is suppressed.
+#
+# COM812 -- Trailing comma missing.
+#           The formatter decides trailing commas independently; the lint rule
+#           clashes with it, producing spurious warnings.  Delegated to the
+#           formatter.
+#
+# T201  -- `print` found.
+#          These are command-line tools: stdout is their user interface.
+#
+# ANN401 -- Dynamically typed expressions (Any) are disallowed.
+#          The Commons/Flickr API payloads are inherently dynamic; explicit
+#          `Any` at the API boundary is deliberate and confined to find_photo.
+ignore = ["D100", "D104", "D203", "D213", "COM812", "T201", "ANN401"]
+
+[tool.ruff.lint.per-file-ignores]
+# find_photo.py -- S310 cannot be suppressed with a line-level noqa (ruff
+# ignores it for urllib.urlopen), and fetching user-picked image URLs is the
+# tool's entire purpose.  The URLs come from its own search results.
+"find_photo.py" = ["S310"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 8
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unused_configs = true
+
+[tool.pyright]
+typeCheckingMode = "strict"

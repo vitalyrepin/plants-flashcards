@@ -1,0 +1,37 @@
+name: lint
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install linters
+        run: |
+          pip install ruff==0.11.6 mypy==2.3.1 pillow
+      - name: Ruff
+        run: ruff check .
+      - name: Mypy (strict)
+        run: mypy make_flashcards.py find_photo.py
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install TeX Live, poppler and Pillow
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-extra texlive-lang-cyrillic \
+              cm-super poppler-utils python3-pil
+      - name: Build every deck
+        run: ./make_flashcards.py --all
+      - name: Verify the PDFs
+        run: |
+          test -f perennier/perennier.pdf
+          pdfinfo perennier/perennier.pdf | grep -E '^Pages:\s+[0-9]+$'

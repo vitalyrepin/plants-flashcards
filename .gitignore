@@ -1,0 +1,10 @@
+__pycache__/
+.mypy_cache/
+.ruff_cache/
+.build.lock
+*.aux
+*.log
+*.out
+preview-*.png
+measure-*.png
+dbg*.png
