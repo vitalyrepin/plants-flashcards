@@ -55,8 +55,9 @@ fonts (blurry print, no copy/paste) with only a soft warning.
 
    Check: photos in the requested cells, captions mirrored on the even
    pages, no content overflowing a card, credits page up to date.
-5. Commit (aux/log/out files are deleted by the build and gitignored) and
-   open a pull request.
+5. Commit and open a pull request. Generated files (`.tex`, `.pdf`,
+   aux/log/out, caches) are deleted by the build and gitignored — the CI
+   `build` job regenerates the PDFs to prove the decks still build.
 
 ## Photo policy
 

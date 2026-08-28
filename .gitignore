@@ -5,6 +5,8 @@ __pycache__/
 *.aux
 *.log
 *.out
+*.pdf
+*.tex
 preview-*.png
 measure-*.png
 dbg*.png

@@ -24,7 +24,7 @@ perennier/                 example deck (40 perennials, 7 sheets)
   images/                  one photo per plant, named from the Latin name
   credits_sources.csv      image → source mapping (Commons File:title or direct)
   credits.csv              generated: image → author, license, source URL
-  perennier.tex/.pdf       generated output (PDF = print-ready)
+  perennier.tex/.pdf       generated output - print-ready, not committed
 trees/                     …next deck goes here
 .claude/skills/            Claude Code workflows (new-deck, plant-cards)
 .github/workflows/         CI: ruff + mypy on every push/PR
