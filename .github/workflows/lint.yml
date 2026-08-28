@@ -8,13 +8,13 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
         with:
           python-version: "3.12"
       - name: Install linters
         run: |
-          pip install ruff==0.11.6 mypy==2.3.1 pillow
+          pip install --quiet ruff==0.11.6 mypy==2.3.1 pillow
       - name: Ruff
         run: ruff check .
       - name: Mypy (strict)
@@ -23,11 +23,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
       - name: Install TeX Live, poppler and Pillow
         run: |
-          sudo apt-get update
-          sudo apt-get install -y texlive-latex-extra texlive-lang-cyrillic \
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq texlive-latex-extra texlive-lang-cyrillic \
               cm-super poppler-utils python3-pil
       - name: Build every deck
         run: ./make_flashcards.py --all
